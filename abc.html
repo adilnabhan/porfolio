@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adil Nabhan | Full Stack Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --dark: #1e1e2f;
+            --light: #f8f9fa;
+            --success: #2dce89;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background: #f9f9f9;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 150px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+            background: white;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        /* Navigation styling */
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            margin: 0 10px;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero section adjustments */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-container {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .hero-content {
+                margin-bottom: 50px;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Adil Nabhan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">Hello, I'm <br>
+            <span style="background: rgba(255,255,255,0.2); padding: 0 10px; border-radius: 8px;">Adil Nabhan</span>
+          </h1>
+          <h2 class="hero-subtitle">Full Stack Python Developer</h2>
+          <p class="lead mb-4">I create elegant, professional web solutions that drive results and enhance user experiences.</p>
+  
+          <!-- Buttons -->
+          <a href="Adil_Nabhan_ATS_Resume.pdf" target="_blank" class="btn btn-outline-light btn-lg px-4 py-2 me-3">Download Resume</a>
+  
+          <!-- Social Icons -->
+          <a href="https://github.com/adilnabhan" target="_blank" class="me-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" style="width:40px; height:40px; border-radius:50%; background:#4e54c8; padding:8px;">
+          </a>
+          <a href="http://www.linkedin.com/in/adil-nabhanc-v-" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:40px; height:40px; border-radius:50%; background:#4e54c8; padding:8px;">
+          </a>
+        </div>
+  
+        <!-- Profile Image -->
+        <div>
+          <img src="about.jpg" alt="Adil Nabhan" class="profile-img">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title d-inline-block">Technical Skills</h2>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fab fa-html5 fa-3x text-danger"></i>
+                        </div>
+                        <h3 class="h5 text-center">HTML/CSS</h3>
+                        <p class="text-muted">Creating responsive, modern layouts with clean and semantic code.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fab fa-js-square fa-3x text-warning"></i>
+                        </div>
+                        <h3 class="h5 text-center">JavaScript</h3>
+                        <p class="text-muted">Building interactive web applications with modern JavaScript.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fab fa-bootstrap fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="h5 text-center">Bootstrap</h3>
+                        <p class="text-muted">Developing responsive websites quickly with Bootstrap framework.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fab fa-react fa-3x text-info"></i>
+                        </div>
+                        <h3 class="h5 text-center">React</h3>
+                        <p class="text-muted">Building dynamic user interfaces with React library.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fab fa-python fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="h5 text-center">Python</h3>
+                        <p class="text-muted">Developing robust backend solutions with Python.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="skill-card">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-database fa-3x text-secondary"></i>
+                        </div>
+                        <h3 class="h5 text-center">SQL</h3>
+                        <p class="text-muted">Designing and managing efficient database systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+<section id="projects" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title d-inline-block">Projects</h2>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Kurious Chef -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <img src="https://picsum.photos/seed/kurious-chef/1200/800" class="project-img card-img-top" alt="Kurious Chef - Recipe Finder">
+            <div class="card-body">
+              <h3 class="h5 mb-2">Kurious Chef — Recipe Finder</h3>
+              <p class="text-muted mb-3">Recipe discovery platform with advanced filters and favorites.</p>
+              <ul class="list-unstyled mb-0">
+                <li><small class="text-primary">React Frontend</small></li>
+                <li><small class="text-primary">Django REST API</small></li>
+                <li><small class="text-primary">SQL Database</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <!-- E-Commerce Website -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <img src="https://picsum.photos/seed/ecommerce/1200/800" class="project-img card-img-top" alt="E-Commerce Website">
+            <div class="card-body">
+              <h3 class="h5 mb-2">E-Commerce Website</h3>
+              <p class="text-muted mb-3">Full-featured shopping platform with auth, cart, and payments.</p>
+              <ul class="list-unstyled mb-0">
+                <li><small class="text-primary">Django REST Framework</small></li>
+                <li><small class="text-primary">React UI</small></li>
+                <li><small class="text-primary">Payment Integration</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Job Portal -->
+        <div class="col-lg-4 col-md-6">
+          <div class="project-card">
+            <img src="https://picsum.photos/seed/job-portal/1200/800" class="project-img card-img-top" alt="Job Portal Website">
+            <div class="card-body">
+              <h3 class="h5 mb-2">Job Portal Website</h3>
+              <p class="text-muted mb-3">Connects service providers with customers via profiles & reviews.</p>
+              <ul class="list-unstyled mb-0">
+                <li><small class="text-primary">Profiles & Ratings</small></li>
+                <li><small class="text-primary">Location Search</small></li>
+                <li><small class="text-primary">Responsive UI (Bootstrap)</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+    
+                    
+               
+ 
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title d-inline-block">Get In Touch</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="text-center mt-5">
+                        <h3 class="h5 mb-3">Connect with me</h3>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2023 Adil Nabhan. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
