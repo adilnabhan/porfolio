@@ -27,6 +27,11 @@
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-scrolled {
+            padding: 8px 0;
         }
         
         .hero {
@@ -116,6 +121,9 @@
             transition: transform 0.3s;
             margin-bottom: 30px;
             background: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .project-card:hover {
@@ -125,6 +133,21 @@
         .project-img {
             height: 200px;
             object-fit: cover;
+        }
+        
+        .project-card .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card .card-text {
+            flex-grow: 1;
+        }
+        
+        .project-btn {
+            margin-top: auto;
+            align-self: flex-start;
         }
         
         .bg-gradient {
@@ -208,6 +231,106 @@
             flex-wrap: wrap;
         }
         
+        /* About section */
+        .about-content {
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Social icons in hero */
+        .hero-social {
+            margin-top: 20px;
+        }
+        
+        .hero-social a {
+            display: inline-block;
+            margin-right: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .hero-social a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hero-social-icon {
+            width: 55px;
+            height: 55px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .hero-social-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Form status message */
+        .status-message {
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .status-message.success {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-message.error {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* About section enhancements */
+        .about-badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .about-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .about-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-list li i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .progress {
+            height: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary);
+        }
+        
         @media (max-width: 992px) {
             .hero-container {
                 justify-content: center;
@@ -221,12 +344,60 @@
             .hero-title {
                 font-size: 2.8rem;
             }
+            
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .about-content {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .btn-light {
+                padding: 10px 20px;
+            }
+            
+            .hero-social-icon {
+                width: 45px;
+                height: 45px;
+                margin-right: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">Adil Nabhan</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -236,6 +407,9 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#skills">Skills</a>
@@ -252,36 +426,109 @@
     </nav>
 
     <!-- Hero Section -->
-<section id="home" class="hero">
-    <div class="container">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">Hello, I'm <br>
-            <span style="background: rgba(255,255,255,0.2); padding: 0 10px; border-radius: 8px;">Adil Nabhan</span>
-          </h1>
-          <h2 class="hero-subtitle">Full Stack Python Developer</h2>
-          <p class="lead mb-4">I create elegant, professional web solutions that drive results and enhance user experiences.</p>
-  
-          <!-- Buttons -->
-          <a href="Adil_Nabhan_ATS_Resume.pdf" target="_blank" class="btn btn-outline-light btn-lg px-4 py-2 me-3">Download Resume</a>
-  
-          <!-- Social Icons -->
-          <a href="https://github.com/adilnabhan" target="_blank" class="me-3">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" style="width:40px; height:40px; border-radius:50%; background:#4e54c8; padding:8px;">
-          </a>
-          <a href="http://www.linkedin.com/in/adil-nabhanc-v-" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:40px; height:40px; border-radius:50%; background:#4e54c8; padding:8px;">
-          </a>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Hello, I'm <br>
+                        <span style="background: rgba(255,255,255,0.2); padding: 0 10px; border-radius: 8px;">Adil Nabhan</span>
+                    </h1>
+                    <h2 class="hero-subtitle">Full Stack Python Developer</h2>
+                    <p class="lead mb-4">I create elegant, professional web solutions that drive results and enhance user experiences.</p>
+            
+                    <!-- Buttons -->
+                    <a href="ADIL NABHAN C V  (1).pdf" target="_blank" class="btn btn-outline-light btn-lg px-4 py-2 me-3">Download Resume</a>
+            
+                    <!-- Social Icons - Improved with better styling -->
+                    <div class="hero-social">
+                        <a href="https://github.com/adilnabhan" target="_blank" class="hero-social-icon">
+                            <img src="github-6980894_960_720.webp" alt="GitHub" style="width:28px; height:28px;">
+                        </a>
+                        <a href="http://www.linkedin.com/in/adil-nabhanc-v-" target="_blank" class="hero-social-icon">
+                            <img src="link.png" alt="LinkedIn" style="width:28px; height:28px;">
+                        </a>
+                    </div>
+                </div>
+        
+                <!-- Profile Image -->
+                <div>
+                    <img src="adilpfp.png" alt="Adil Nabhan" class="profile-img">
+                </div>
+            </div>
         </div>
-  
-        <!-- Profile Image -->
-        <div>
-          <img src="about.jpg" alt="Adil Nabhan" class="profile-img">
+    </section>
+
+    <!-- About Me Section - Enhanced -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title d-inline-block">About Me</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="about-content">
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-4 mb-md-0">
+                                <img src="about.jpg" alt="Adil Nabhan" class="img-fluid rounded-circle shadow" style="max-width: 250px;">
+                                <div class="mt-4">
+                                    <span class="about-badge">Full Stack Developer</span>
+                                    <div class="mt-3">
+                                        <a href="https://github.com/adilnabhan" target="_blank" class="social-icon" title="GitHub">
+                                            <i class="fab fa-github"></i>
+                                        </a>
+                                        <a href="http://www.linkedin.com/in/adil-nabhanc-v-" target="_blank" class="social-icon" title="LinkedIn">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+                                        <a href="#" class="social-icon" title="Portfolio">
+                                            <i class="fas fa-globe"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="mb-3">Crafting Digital Experiences with Code</h3>
+                                <p class="mb-4">I'm a passionate Full Stack Developer with expertise in Python-based web development. With over 2 years of experience, I specialize in creating responsive, user-friendly websites and applications that deliver exceptional user experiences.</p>
+                                
+                                
+                                
+                                <h4 class="mb-3">My Skills & Expertise</h4>
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Python/Django</span>
+                                        <span>95%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 95%"></div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span>JavaScript/React</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <span>Database Design</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                
+                                <a href="#contact" class="btn btn-primary">Hire Me</a>
+                                <a href="#projects" class="btn btn-outline-primary ms-2">View Projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-  
+    </section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-5" style="background: #f8f9fa;">
@@ -351,72 +598,69 @@
     </section>
 
     <!-- Projects Section -->
-<section id="projects" class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center mb-5">
-          <h2 class="section-title d-inline-block">Projects</h2>
-        </div>
-      </div>
-  
-      <div class="row">
-        <!-- Kurious Chef -->
-        <div class="col-lg-4 col-md-6">
-          <div class="project-card">
-            <img src="https://picsum.photos/seed/kurious-chef/1200/800" class="project-img card-img-top" alt="Kurious Chef - Recipe Finder">
-            <div class="card-body">
-              <h3 class="h5 mb-2">Kurious Chef — Recipe Finder</h3>
-              <p class="text-muted mb-3">Recipe discovery platform with advanced filters and favorites.</p>
-              <ul class="list-unstyled mb-0">
-                <li><small class="text-primary">React Frontend</small></li>
-                <li><small class="text-primary">Django REST API</small></li>
-                <li><small class="text-primary">SQL Database</small></li>
-              </ul>
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title d-inline-block">Projects</h2>
+                </div>
             </div>
-          </div>
-        </div>
-  
-        <!-- E-Commerce Website -->
-        <div class="col-lg-4 col-md-6">
-          <div class="project-card">
-            <img src="https://picsum.photos/seed/ecommerce/1200/800" class="project-img card-img-top" alt="E-Commerce Website">
-            <div class="card-body">
-              <h3 class="h5 mb-2">E-Commerce Website</h3>
-              <p class="text-muted mb-3">Full-featured shopping platform with auth, cart, and payments.</p>
-              <ul class="list-unstyled mb-0">
-                <li><small class="text-primary">Django REST Framework</small></li>
-                <li><small class="text-primary">React UI</small></li>
-                <li><small class="text-primary">Payment Integration</small></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Job Portal -->
-        <div class="col-lg-4 col-md-6">
-          <div class="project-card">
-            <img src="https://picsum.photos/seed/job-portal/1200/800" class="project-img card-img-top" alt="Job Portal Website">
-            <div class="card-body">
-              <h3 class="h5 mb-2">Job Portal Website</h3>
-              <p class="text-muted mb-3">Connects service providers with customers via profiles & reviews.</p>
-              <ul class="list-unstyled mb-0">
-                <li><small class="text-primary">Profiles & Ratings</small></li>
-                <li><small class="text-primary">Location Search</small></li>
-                <li><small class="text-primary">Responsive UI (Bootstrap)</small></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-    </div>
-  </section>
-  
     
-                    
-               
- 
-
+            <div class="row">
+                <!-- Kurious Chef -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <img src="https://picsum.photos/seed/kurious-chef/1200/800" class="project-img card-img-top" alt="Kurious Chef - Recipe Finder">
+                        <div class="card-body">
+                            <h3 class="h5 mb-2">Kurious Chef — Recipe Finder</h3>
+                            <p class="text-muted mb-3">Recipe discovery platform with advanced filters and favorites.</p>
+                            <ul class="list-unstyled mb-3">
+                                <li><small class="text-primary">React Frontend</small></li>
+                                <li><small class="text-primary">Django REST API</small></li>
+                                <li><small class="text-primary">SQL Database</small></li>
+                            </ul>
+                            <a href="https://kuriouschef.netlify.app" target="_blank" class="btn btn-primary project-btn">View Project</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- E-Commerce Website -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <img src="https://picsum.photos/seed/ecommerce/1200/800" class="project-img card-img-top" alt="E-Commerce Website">
+                        <div class="card-body">
+                            <h3 class="h5 mb-2">E-Commerce Website</h3>
+                            <p class="text-muted mb-3">Full-featured shopping platform with auth, cart, and payments.</p>
+                            <ul class="list-unstyled mb-3">
+                                <li><small class="text-primary">Django REST Framework</small></li>
+                                <li><small class="text-primary">React UI</small></li>
+                                <li><small class="text-primary">Payment Integration</small></li>
+                            </ul>
+                            <a href="#" target="_blank" class="btn btn-primary project-btn">View Project</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Job Portal -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <img src="https://picsum.photos/seed/job-portal/1200/800" class="project-img card-img-top" alt="Job Portal Website">
+                        <div class="card-body">
+                            <h3 class="h5 mb-2">Job Portal Website</h3>
+                            <p class="text-muted mb-3">Connects service providers with customers via profiles & reviews.</p>
+                            <ul class="list-unstyled mb-3">
+                                <li><small class="text-primary">Profiles & Ratings</small></li>
+                                <li><small class="text-primary">Location Search</small></li>
+                                <li><small class="text-primary">Responsive UI (Bootstrap)</small></li>
+                            </ul>
+                            <a href="#" target="_blank" class="btn btn-primary project-btn">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Contact Section -->
     <section id="contact" class="py-5 bg-light">
         <div class="container">
@@ -428,34 +672,51 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-form">
-                        <form>
+                        <form id="contactForm">
+                            <div id="formStatus" class="status-message"></div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" required>
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="subject" required>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
                         </form>
                     </div>
                     <div class="text-center mt-5">
                         <h3 class="h5 mb-3">Connect with me</h3>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/adil-nabhanc-v-" target="_blank" class="social-icon" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        
+                        <!-- GitHub -->
+                        <a href="https://github.com/adilnabhan" target="_blank" class="social-icon" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        
+                        <!-- Twitter -->
+                        <a href="https://twitter.com/" target="_blank" class="social-icon" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/" target="_blank" class="social-icon" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -485,6 +746,14 @@
             } else {
                 backToTopButton.classList.remove('show');
             }
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
         });
         
         backToTopButton.addEventListener('click', (e) => {
@@ -508,6 +777,46 @@
                     });
                 }
             });
+        });
+        
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const formStatus = document.getElementById('formStatus');
+            
+            // Here you would typically send the form data to a server
+            // For demonstration, we'll simulate a successful submission
+            
+            // Simulate form submission
+            formStatus.textContent = 'Sending your message...';
+            formStatus.className = 'status-message';
+            formStatus.style.display = 'block';
+            
+            setTimeout(() => {
+                formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+                formStatus.className = 'status-message success';
+                document.getElementById('contactForm').reset();
+            }, 1500);
+            
+            // In a real implementation, you would use fetch or XMLHttpRequest to send the data
+            /* 
+            fetch('your-server-endpoint', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+                formStatus.className = 'status-message success';
+                document.getElementById('contactForm').reset();
+            })
+            .catch(error => {
+                formStatus.textContent = 'Sorry, there was an error sending your message. Please try again.';
+                formStatus.className = 'status-message error';
+            });
+            */
         });
     </script>
 </body>
